@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OptionPulse">
+<link rel="manifest" href="manifest.webmanifest">
+<title>OptionPulse</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;color:#f4f7f5;background:#080a0d;--card:#11151a;--muted:#89939d;--line:#20262d;--green:#36d27a;--red:#ff5d68;--amber:#f3bd4f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#17201b 0,#080a0d 38%);min-height:100vh}
+.app{max-width:720px;margin:auto;padding:env(safe-area-inset-top) 16px calc(92px + env(safe-area-inset-bottom))}
+header{height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:23px;font-weight:800;letter-spacing:-.7px}.logo span{color:var(--green)}
+.live{font-size:11px;font-weight:700;color:var(--green);border:1px solid #285c42;border-radius:20px;padding:7px 10px}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;background:#0e1216;border:1px solid var(--line);padding:5px;border-radius:16px;margin-bottom:16px}
+nav button{border:0;background:transparent;color:var(--muted);padding:10px 3px;border-radius:11px;font-size:12px;font-weight:700}nav button.active{background:#1a211e;color:#fff}
+h1{font-size:17px;margin:20px 0 10px}.sub{color:var(--muted);font-size:12px}
+.card{background:rgba(17,21,26,.96);border:1px solid var(--line);border-radius:18px;padding:16px;margin:10px 0}
+.signal{border-color:#27563e;box-shadow:0 0 0 1px #183323 inset}
+.signalTop{display:flex;justify-content:space-between;align-items:center}.badge{font-size:12px;font-weight:800;color:#07110b;background:var(--green);padding:7px 10px;border-radius:9px}.score{font-size:12px;color:var(--green);font-weight:800}
+.symbol{font-size:24px;font-weight:800;margin:13px 0 3px}.strike{font-size:14px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}.metric{background:#0c1014;border:1px solid #1c2329;border-radius:12px;padding:10px}.metric b{display:block;font-size:15px}.metric small{color:var(--muted);font-size:10px}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
+.row{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border:0}.row span:first-child{color:var(--muted)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:0;border-radius:12px;padding:13px;font-weight:800;background:#20262d;color:#fff}.btn.primary{background:var(--green);color:#07110b}
+.chain{width:100%;border-collapse:collapse;font-size:11px}.chain th{color:var(--muted);font-weight:600;padding:8px 4px}.chain td{text-align:center;padding:10px 3px;border-top:1px solid var(--line)}.atm{background:#17251d}.ce{color:#67df9b}.pe{color:#ff7d86}
+.page{display:none}.page.active{display:block}.empty{padding:35px 10px;text-align:center;color:var(--muted)}
+footer{position:fixed;bottom:0;left:0;right:0;text-align:center;color:#59636d;font-size:10px;padding:8px;background:rgba(8,10,13,.92);backdrop-filter:blur(12px)}
+@media(min-width:700px){.app{padding-bottom:70px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">Option<span>Pulse</span></div><div class="live">● PAPER LIVE</div></header>
+<nav>
+<button class="active" data-page="dashboard">Dashboard</button><button data-page="chain">Chain</button><button data-page="journal">Journal</button><button data-page="settings">Settings</button>
+</nav>
+
+<section id="dashboard" class="page active">
+<div class="sub">NIFTY • simulated market feed</div>
+<div class="card signal">
+<div class="signalTop"><div class="badge">BUY CALL</div><div class="score">86 / 100</div></div>
+<div class="symbol">NIFTY 25,000 CE</div><div class="strike">Paper setup • signal engine prototype</div>
+<div class="grid">
+<div class="metric"><small>ENTRY</small><b>₹182</b></div><div class="metric"><small>STOP</small><b class="red">₹158</b></div><div class="metric"><small>TARGET</small><b class="green">₹230</b></div>
+</div>
+<div class="row"><span>Momentum</span><b class="green">Strong</b></div>
+<div class="row"><span>VWAP</span><b class="green">Above</b></div>
+<div class="row"><span>OI Flow</span><b>Call unwind</b></div>
+<div class="row"><span>Volume</span><b class="green">Expanding</b></div>
+<div class="actions"><button class="btn primary" id="paperBuy">Paper Trade</button><button class="btn" id="noTrade">No Trade</button></div>
+</div>
+<h1>Market regime</h1>
+<div class="card"><div class="row"><span>Regime</span><b>Trending</b></div><div class="row"><span>VWAP</span><b>24,942</b></div><div class="row"><span>India VIX</span><b>13.8</b></div><div class="row"><span>PCR</span><b>1.08</b></div><div class="row"><span>Breadth</span><b class="green">Positive</b></div></div>
+</section>
+
+<section id="chain" class="page">
+<div class="sub">NIFTY option chain • prototype data</div><h1>Option chain</h1>
+<div class="card"><table class="chain"><thead><tr><th>CE OI</th><th>CE LTP</th><th>STRIKE</th><th>PE LTP</th><th>PE OI</th></tr></thead><tbody>
+<tr><td>42.1L</td><td class="ce">241</td><td>24,900</td><td class="pe">112</td><td>31.7L</td></tr>
+<tr><td>38.5L</td><td class="ce">208</td><td>24,950</td><td class="pe">139</td><td>34.2L</td></tr>
+<tr class="atm"><td>31.2L</td><td class="ce">182</td><td><b>25,000</b></td><td class="pe">167</td><td>36.8L</td></tr>
+<tr><td>27.9L</td><td class="ce">151</td><td>25,050</td><td class="pe">201</td><td>29.4L</td></tr>
+<tr><td>22.6L</td><td class="ce">125</td><td>25,100</td><td class="pe">239</td><td>25.1L</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="journal" class="page"><div class="sub">Paper positions and signals</div><h1>Trade journal</h1><div id="journalList" class="card"><div class="empty">No paper trades yet.</div></div></section>
+
+<section id="settings" class="page"><div class="sub">System configuration</div><h1>Settings</h1>
+<div class="card"><div class="row"><span>Broker</span><b>Groww — pending connection</b></div><div class="row"><span>Execution</span><b class="amber">OFF</b></div><div class="row"><span>Mode</span><b>Paper trading</b></div><div class="row"><span>Signal engine</span><b>Server-side planned</b></div></div>
+<div class="card"><b>OptionPulse V1</b><p class="sub">This build uses simulated market data. No broker credentials are stored in the app.</p></div>
+</section>
+</div>
+<footer>OptionPulse • paper trading only • execution disabled</footer>
+<script>
+const buttons=document.querySelectorAll('nav button');
+buttons.forEach(b=>b.onclick=()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(b.dataset.page).classList.add('active')});
+const list=document.getElementById('journalList');
+document.getElementById('paperBuy').onclick=()=>{const t=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});list.innerHTML='<div class="row"><span>'+t+'</span><b class="green">BUY CALL NIFTY 25,000 CE</b></div><div class="row"><span>Entry</span><b>₹182</b></div><div class="row"><span>Status</span><b>OPEN • PAPER</b></div>';document.querySelector('[data-page="journal"]').click()};
+document.getElementById('noTrade').onclick=()=>alert('Signal dismissed. No paper order created.');
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body></html>
